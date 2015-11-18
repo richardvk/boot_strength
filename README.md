@@ -3,7 +3,7 @@ BootStrength.js
 
 A password strength plugin for Bootstrap. Based on Strength.js by @aaronlumsden (http://git.aaronlumsden.com/strength.js/)
 
-### Documentation
+#### Documentation
 
 BootStrength.js is a fork of Strength.js originally forked to make it work nicely with Bootstrap. 
 
@@ -34,11 +34,12 @@ Firstly include jQuery, Bootstrap and the boot_strength js and css files. Place 
 ##### Create a password input field:
 
 The 'password' field must have a unique ID, and you MUST include the 'boot_strength' class to the bootstrap 'form-group' div.
-
+```
     <div class="form-group boot_strength">
      <label for="password">Please enter a new password</label>
      <input type="password" class="form-control" id="password" name="password" value=''>
     </div>
+```
 
 ##### Instantiate the plugin for each element, including any option overrides where necessary:
 
@@ -46,12 +47,14 @@ Once you have created your password input field you will need to initiate the pl
 
 At its most basic level you can initiate the plugin like:
 
+```
  $(function(){
 
    $('#password').boot_strength({
     strength_minlength: 10,
     strength_required_special:3
    });
+```
 
    $('#password2').boot_strength({
     strength_minlength: 9,
