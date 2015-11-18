@@ -39,7 +39,7 @@ The 'password' field must have a unique ID, and you MUST add the 'boot_strength'
      <label for="password">Please enter a new password</label>
      <input type="password" class="form-control" id="password" name="password" value=''>
     </div>
-``
+```
 
 ##### Instantiate the plugin for each element, including any option overrides where necessary:
 
