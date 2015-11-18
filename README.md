@@ -20,7 +20,7 @@ For a demo see http://bootstrength.lowlevel.co.za
 
 ##### Include the relevant files:
 
-Firstly include jQuery, Bootstrap and the boot_strength js and css files. Place these before `</head>` section
+Firstly include jQuery, Bootstrap and the boot_strength js and css files. Place these before the `</head>` tag.
 
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
@@ -43,9 +43,9 @@ The 'password' field must have a unique ID, and you MUST include the 'boot_stren
 
 ##### Instantiate the plugin for each element, including any option overrides where necessary:
 
-Once you have created your password input field you will need to initiate the plugin.
+Once you have created your password input field you will need to instantiate the plugin for each required input element.
 
-At its most basic level you can initiate the plugin like:
+Examples include:
 
 ```
  $(function(){
@@ -105,12 +105,6 @@ The password strength definition includes the following options:
                         <td>1</td>
                         <td>The number of required special characters</td>
                         <td>Positive integer</td>
-                </tr>
-		<tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
                 </tr>
 	</tbody>
 </table>
