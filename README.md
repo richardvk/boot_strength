@@ -34,12 +34,12 @@ Firstly include jQuery, Bootstrap and the boot_strength js and css files. Place 
 ##### Create a password input field:
 
 The 'password' field must have a unique ID, and you MUST add the 'boot_strength' class to the bootstrap 'form-group' div.
-<pre>
-    <div class="form-group <b>boot_strength</b>">
+```
+    <div class="form-group boot_strength">
      <label for="password">Please enter a new password</label>
-     <input type="password" class="form-control" **id="password"** name="password" value=''>
+     <input type="password" class="form-control" id="password" name="password" value=''>
     </div>
-</pre>
+``
 
 ##### Instantiate the plugin for each element, including any option overrides where necessary:
 
