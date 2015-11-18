@@ -20,7 +20,7 @@ For a demo see http://bootstrength.lowlevel.co.za
 
 ##### Include the relevant files:
 
-Firstly include jQuery, Bootstrap and the boot_strength js and css files. Place these before `&lt;/head&gt;` section
+Firstly include jQuery, Bootstrap and the boot_strength js and css files. Place these before `</head>` section
 
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
@@ -54,12 +54,12 @@ At its most basic level you can initiate the plugin like:
     strength_minlength: 10,
     strength_required_special:3
    });
-```
 
    $('#password2').boot_strength({
     strength_minlength: 9,
    });
  }); // end document.ready
+```
 
 
 #### Options
