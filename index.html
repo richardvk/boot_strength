@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title></title>
+
+<link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+<!--<link href="/css/style.css" rel="stylesheet">
+<link href="/font-awesome/css/font-awesome.min.css" defer rel="stylesheet"> -->
+<link href="css/boot_strength.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
+<!-- <link rel="stylesheet" href="/css/signin.css"> -->
+<script src="https://code.jquery.com/jquery-2.1.4.min.js" type="text/javascript"></script>
+<!--<script src="/bootstrap/js/bootstrap.min.js"></script>-->
+<script src="js/boot_strength.js" type="text/javascript"></script>
+
+</head>
+<body>
+
+<div class="container" style="width: 500px;">
+
+ <div class="row" >
+  <div class="col-xs-12">
+   <img src='/images/mission_control_logo_login.png' height='101' width='320' class="img-responsiv center-block"/>
+  </div><!-- end col -->
+ </div><!-- end row -->
+ <form class="form-signin" role="form" id="auth_user_form">
+ <h2 class="form-signin-heading">New Tacacs password</h2>
+ <div id="err_msg" class="alert {if $have_error}alert-danger{else}hid{/if}">{if $have_error}{$error_msg}{/if}</div>
+
+ {if !$have_error}
+<form class="" role="form" id="reset_password_form">
+ <input type="hidden" name="enc_pwd" id="enc_pwd" value="">
+
+ <div class="form-group boot_strength">
+  <label for="password">Please enter a new password</label>
+  <input type="password" class="form-control" id="password" name="password" value=''>
+ </div>
+ <div class="form-group boot_strength">
+  <label for="password2">Please repeat your password</label>
+  <input type="password" class="form-control" id="password2" name="password2" value=''>
+ </div>
+ <br/>
+ <button class="btn btn-lg btn-primary btn-block" type="submit" id="submit_button">Submit</button>
+</form>
+ {/if}
+</div><!-- end container -->
+</body>
+
+<script>
+ {literal}
+$(function(){
+
+ $('#password').boot_strength({
+  strength_minlength: 10,
+  strength_required_special:3 
+ });
+
+ $('#password2').boot_strength({
+  strength_minlength: 9,
+ });
+
+
+ $("#submit_button").click(function(){
+  event.preventDefault();
+  var reset_button_text = 0;
+
+  if ($("#password").val() != $("#password2").val()) {
+   $("#err_msg").html("The passwords do not match").delay(500).removeClass("alert-info alert-success").addClass("alert-danger").slideDown("slow").delay(4000).slideUp( "slow");
+   $("#password").focus();
+   return false;
+  } // end if
+  else {
+   var p = $("#password").val();
+   //var s = randomString(32, '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ');
+   //var s = btoa(p);
+   //var e = encodeURIComponent(CryptoJS.DES.encrypt(p, s));
+   //var e = encodeURIComponent(CryptoJS.TripleDES.encrypt(p, s));
+   //var e = encodeURIComponent(CryptoJS.MD5(p));
+   //$("#enc_pwd").val(e);
+  } // else
+
+  var g = '{/literal}{$guid}{literal}';
+
+  $("#submit_button").html("<i class='fa fa-spinner fa-spin'></i>&nbsp;Saving and committing...");
+
+  // All form elements are checked, lets submit!
+  //$.post("update_password.php", {enc_pwd:e,guid:{/literal}{$guid}{literal}},
+  $.post("update_password.php", {enc_pwd:p,guid:g},
+   function( data ) {
+    //console.log("Sending password: "+p);
+    if (data.return_status == 'fatal' || data.return_status == 'error') {
+     $("#err_msg").html(data.return_message).delay(500).removeClass("alert-info alert-success").addClass("alert-danger").slideDown("slow").delay(4000).slideUp( "slow");
+     $("#submit_button").html("Submit");
+    }
+    else if (data.return_status != 'none' && data.return_message.length) {
+     $("#err_msg").html(data.return_message).delay(500).removeClass("alert-info alert-danger").addClass("alert-success").slideDown("slow");
+     reset_button_text = 1;
+    }
+    else {
+     //$("#radius_user_msg").html("An unknown error occured").delay(500).removeClass("alert-info alert-success").addClass("alert-danger").slideDown("slow").delay(4000).slideUp( "slow");
+     alert(data.return_message);
+    }
+   },'json'
+  ); // end .post
+
+  var mytextchanger = setInterval(function(){ 
+   if (reset_button_text) {
+    $("#submit_button").html("Done!"); 
+    $("#submit_button").prop('disabled', true);
+    reset_button_text = 0;
+    clearInterval(mytextchanger);
+   }
+  }, 1000);
+
+ });   // end submit button .click
+}); // end document.ready
+
+function randomString(length, chars) {
+ var result = '';
+ for (var i = length; i > 0; --i) result += chars[Math.round(Math.random() * (chars.length - 1))];
+ return result;
+}
+
+ {/literal}
+</script>
+</html>
